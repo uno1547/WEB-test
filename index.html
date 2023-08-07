@@ -3,9 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <script src = "recursive.js"></script>
+  <script src = "https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src = "https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src = "https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
-  hi
+  <div id="root"></div>
+  <div id="root2"></div>
+  <script type = text/babel>//바벨이라는 프로그램이 js내의 html코드를 js코드로 변환시켜줌
+    const container = document.querySelector('#root')
+    // const component = <h1>hello world</h1> //JSX문법으로 쓰여진코드 > 바벨이라는 컴파일러가 자바스크립트로 변환후 해석해서 웹브라우저가사용
+    const contents = "아기고양이"
+    const link = "https://www.whiskas.co.uk/cdn-cgi/image/format=auto,q=90/sites/g/files/fnmzdf2281/files/2022-09/Kitten-mobile.jpg"
+    const style1 = {
+      fontWeight : 'bold',
+      color : 'blue'}
+    const handler = (event) => {console.log("click")}
+    const component = <div onClick = {handler}> 
+      <h1>hello world</h1>
+      <img src = {link}/>
+      <div style = {style1}>{contents}</div>
+    </div>//component에 여러 요소 넣으려면 div에 감싸거나 다른 방법사용해야함 
+    ReactDOM.render(component, container)
+  </script>
+  <!-- <script type = "text/babel">  
+    // ReactDOM.render(component2, container) //render은 한개밖에못하는듯
+  </script> -->
 </body>
 </html>
