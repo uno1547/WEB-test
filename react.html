@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src = "https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src = "https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src = "https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <div id="root2"></div>
+  <script type = text/babel>//바벨이라는 프로그램이 js내의 html코드를 js코드로 변환시켜줌
+    class Timer extends React.Component {
+      constructor (props) {
+        super (props)
+        this.eventHandler = this.eventHandler.bind(this)
+        this.state = {
+          timeNow : new Date().toLocaleString(),
+          num : 0
+        }
+        setInterval(() => {
+          this.setState({
+            timeNow : new Date().toLocaleString()
+          })
+        }, 1000);
+      }
+      render () {
+        return <h1 onClick = {this.eventHandler}>{this.state.timeNow} {this.state.num}</h1>
+      }
+      eventHandler (evt) {
+        this.state.num += 1
+      }
+    }
+    class App extends React.Component { //클래스로 컴포넌트를 만들기위해선 이미 리액트 라이브러리가 만둔 react.
+      //App 생성시 Timer도 생성
+      constructor (props) { //React.Component는 생성자로 properties라는 매개변수를 받음 
+        super(props) //super(props)내부에서 this.props = props라는 코드가실행 > 상속되어서 다른곳에서 쓸수있는듯
+      }
+      render () { //이메소드 React.Component라는 부모클래스에 정의되어있다
+        // return <h1>{this.props.prop1} component {this.props.prop2}</h1>
+        return <Timer/>
+      }
+    }
+    const container = document.querySelector('#root')
+    const component = <App prop1 = "hi" prop2 = "hi2"/>//클래스로 만든 컴포넌트에 속성과 값을 주면 App의 constructor(props) 의 props로 전달이 된다.
+    ReactDOM.render(component, container)
+  </script>
+  <!-- <script type = "text/babel">  
+    // ReactDOM.render(component2, container) //render은 한개밖에못하는듯
+  </script> -->
+</body>
+</html>
